@@ -1,23 +1,39 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import { motion } from "motion/react"
+import { useRef, useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 export default function MusicPlayer({ src }) {
-  const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const onError = () => {
+      console.error("Audio failed to load:", audio.src);
+    };
+    audio.addEventListener("error", onError);
+
+    return () => {
+      audio.removeEventListener("error", onError);
+    };
+  }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) return
+    if (!audioRef.current) return;
 
     if (isPlaying) {
-      audioRef.current.pause()
-      setIsPlaying(false)
+      audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play()
-      setIsPlaying(true)
+      audioRef.current.play().catch((error) => {
+        console.error("Audio play error:", error);
+      });
+      setIsPlaying(true);
     }
-  }
+  };
 
   return (
     <div
@@ -27,7 +43,7 @@ export default function MusicPlayer({ src }) {
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") togglePlay()
+        if (e.key === "Enter" || e.key === " ") togglePlay();
       }}
     >
       <audio ref={audioRef} <MusicPlayer src="/audio/bg.mp3" /> loop preload="auto" />
@@ -55,5 +71,6 @@ export default function MusicPlayer({ src }) {
         </svg>
       )}
     </div>
-  )
-}
+  );
+      }
+        
