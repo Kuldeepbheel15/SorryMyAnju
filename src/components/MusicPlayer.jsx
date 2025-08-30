@@ -43,7 +43,7 @@ export default function MusicPlayer({ src }) {
          tabIndex={0}
          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") togglePlay() }}
     >
-      <audio ref={audioRef} src={src} loop preload="auto" />
+      <audio ref={audioRef} src="audio/bg.mp3" loop preload="auto" />
       
       {isPlaying ? (
         <motion.svg
