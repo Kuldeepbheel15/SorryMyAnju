@@ -36,7 +36,7 @@ export default function MusicPlayer({ src }) {
       zIndex: 9999
     }} onClick={togglePlay}>
       {isPlaying ? "⏸ Pause Music" : "▶ Play Music"}
-      <audio ref={audioRef} <MusicPlayer src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+      <audio ref={audioRef} <MusicPlayer src="/audio/bg.mp3" />
  preload="auto" loop />
     </div>
   );
