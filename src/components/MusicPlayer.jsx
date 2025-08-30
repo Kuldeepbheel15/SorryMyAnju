@@ -30,7 +30,7 @@ export default function MusicPlayer({ src }) {
         if (e.key === "Enter" || e.key === " ") togglePlay()
       }}
     >
-      <audio ref={audioRef} src="/audio/bg.mp3" loop preload="auto" />
+      <audio ref={audioRef} <MusicPlayer src="/audio/song.mp3" /> loop preload="auto" />
 
       {isPlaying ? (
         <motion.svg
