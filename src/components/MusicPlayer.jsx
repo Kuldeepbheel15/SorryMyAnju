@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-export default function MusicPlayer({ src }) {
+export default function MusicPlayerPage() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -21,23 +21,40 @@ export default function MusicPlayer({ src }) {
   };
 
   return (
-    <div style={{
-      position: "fixed",
-      bottom: "20px",
-      right: "20px",
-      background: "#e91e63",
-      color: "#fff",
-      padding: "16px 24px",
-      borderRadius: "999px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-      fontSize: "16px",
-      fontWeight: "bold",
-      cursor: "pointer",
-      zIndex: 9999
-    }} onClick={togglePlay}>
-      {isPlaying ? "⏸ Pause Music" : "▶ Play Music"}
-      <audio ref={audioRef} <MusicPlayer src="/audio/bg.mp3" />
- preload="auto" loop />
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#111",
+        color: "#fff",
+        flexDirection: "column",
+      }}
+    >
+      <h1 style={{ marginBottom: "20px" }}>Simple Music Player</h1>
+
+      <button
+        onClick={togglePlay}
+        style={{
+          padding: "15px 30px",
+          fontSize: "18px",
+          backgroundColor: "#e91e63",
+          border: "none",
+          borderRadius: "8px",
+          color: "#fff",
+          cursor: "pointer",
+        }}
+      >
+        {isPlaying ? "⏸ Pause Music" : "▶ Play Music"}
+      </button>
+
+      <audio
+        ref={audioRef}
+        src="/audio/bg.mp3" // make sure this file exists
+        preload="auto"
+        loop
+      />
     </div>
   );
 }
